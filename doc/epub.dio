@@ -1,0 +1,46 @@
+<mxfile host="65bd71144e">
+    <diagram id="6p7jGDD_clOlefhtBcm2" name="ページ1">
+        <mxGraphModel dx="642" dy="563" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="ch01.xhtml" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="300" y="180" width="120" height="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="id=001" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="315" y="220" width="90" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="id=002" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="315" y="260" width="90" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="pa01.xhtml" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="300" y="120" width="120" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="ch02.xhtml" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="300" y="360" width="120" height="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="id=001" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="315" y="400" width="90" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="id=002" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="315" y="440" width="90" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="9" target="5">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" style="edgeStyle=none;html=1;" edge="1" parent="1" source="9" target="2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="9" target="3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="9" target="4">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="*_toc.xhtml" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="60" y="120" width="120" height="210" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

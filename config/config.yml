@@ -1,0 +1,5 @@
+epub2audio:
+  output: ./output
+  tmp: ./tmp
+ffmpeg:
+  path: /usr/local/bin/ffmpeg

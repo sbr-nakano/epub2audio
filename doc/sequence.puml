@@ -1,0 +1,37 @@
+@startuml
+skinparam responseMessageBelowArrow true
+
+actor User
+box app
+participant Client
+participant epub2xhtml as e2x
+participant txt2audio as t2a
+end box
+participant ffmpeg
+participant Voicepeak
+
+User -> Client: .epub
+
+Client -> e2x: .epub
+e2x -> e2x: .epub -> .xhtml
+e2x -> e2x: bodyタグ以外を削除
+e2x -> e2x: _toc.xhtml解析
+e2x -> e2x: 分割\n .xhtml -> .xhtml - id単位
+e2x -> e2x: 目次順で接頭辞を付与
+Client <-- e2x: .xhtml - 目次単位
+
+Client -> t2a: .xhtml - 目次単位
+t2a -> t2a: 読み上げ用加工\n.xhtml -> .txt
+t2a -> t2a: 140文字分割\n.txt - 140文字
+t2a -> Voicepeak: .txt - 140文字
+t2a <-- Voicepeak: .wav - 140文字
+t2a -> ffmpeg: .wav - 140文字
+t2a <-- ffmpeg: .wav - 目次単位
+t2a -> ffmpeg: .wav - 目次単位
+t2a <-- ffmpeg: .mp3 - 目次単位
+
+Client <-- t2a: .mp3
+
+User <-- Client: mp3
+
+@enduml
