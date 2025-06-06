@@ -4,30 +4,34 @@
 
 ## プロジェクト概要
 
-epub2audioは、Voicepeak（日本語音声合成）を使用してEPUBファイルを音声に変換するGoベースのアプリケーションです。パイプラインアーキテクチャを採用しています：
+epub2audioは、複数のTTSエンジン（Voicevox、Voicepeak）を使用して、様々なテキスト形式（EPUB、Markdown、HTML）を音声に変換するGoベースのアプリケーションです。拡張可能なアーキテクチャを採用しています：
 
 ```
-EPUB → XHTML抽出 → テキスト処理 → Voicepeak (TTS) → ffmpeg → MP3
+入力ファイル → パーサー → テキスト処理 → TTSエンジン → ffmpeg → 音声ファイル
+(.epub/.md/.html)         (構造保持・ポーズ挿入)  (Voicevox/Voicepeak)
 ```
 
 ## アーキテクチャ
 
-コードベースは2つの主要モジュールで構成されています：
+### 現在の実装状況
+2つの主要モジュールが存在していますが、統合が必要です：
 
 1. **epub2xhtml**: EPUBファイルからXHTMLコンテンツを抽出
-   - EPUBアーカイブを解凍
-   - .xhtml/.htmlファイルを抽出
-   - 目次（_toc.xhtml）を解析
-
 2. **xhtml2audio**: XHTMLをテキストに変換しTTS用に準備
-   - 音声制御用のポーズ文字（全角スペース　）を追加
-   - HTMLタグを除去
-   - テキストを140文字のチャンクに分割
 
-主な実装詳細：
-- ポーズ制御は日本語全角スペース（　）を使用: h1=18個、h2=16個、レベルごとに2個ずつ減少
-- テキストは句読点（。、・？！\r\n）を考慮して140文字境界で分割
-- 現在、main.goファイルは空 - コアロジックは存在するが統合が必要
+### 計画中の新アーキテクチャ
+```
+├── internal/
+│   ├── parser/         # 入力パーサー（EPUB、Markdown、HTML）
+│   ├── tts/           # TTSエンジン（Voicevox、Voicepeak）
+│   ├── processor/     # テキスト処理（ポーズ挿入、分割）
+│   └── orchestrator/  # パイプライン制御
+```
+
+主要インターフェース：
+- **Parser**: 各入力形式を統一されたDocument構造に変換
+- **TTSEngine**: 各TTSエンジンを統一APIで制御
+- **PauseStrategy**: エンジンごとに最適なポーズ表現を生成
 
 ## 開発コマンド
 
@@ -55,10 +59,24 @@ go test -v -run TestAddPause
 
 テストはGoの標準テストパッケージを使用。テストファイルは `*_test.go` パターンに従います。現在のテストはxhtml2audioモジュールのテキスト処理関数をカバーしています。
 
-## 現在の状態
+## 現在の状態と今後の実装
 
-プロジェクト構造は完成していますが、実装は未完成です：
-- コアのテキスト処理ロジックは実装済み
-- メインエントリーポイントの実装が必要
-- Voicepeakとffmpegの統合が保留中
-- コマンドラインインターフェースが未実装
+### 実装済み
+- EPUBからXHTML抽出の基本ロジック
+- テキスト処理（ポーズ挿入、分割）の基本ロジック
+- Voicepeak用の全角スペースによるポーズ制御
+
+### 実装予定
+- 入力パーサーの抽象化（Markdown、HTML対応）
+- TTSエンジンの抽象化（Voicevox対応）
+- CLIインターフェース
+- 設定ファイルシステム
+- バッチ処理と並列化
+
+## 設計ドキュメント
+
+詳細な設計は以下のドキュメントを参照：
+- `doc/architecture_proposal.md` - 全体アーキテクチャ
+- `doc/input_parser_design.md` - 入力パーサー設計
+- `doc/tts_engine_design.md` - TTSエンジン設計
+- `doc/implementation_plan.md` - 実装計画
